@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://spawner.gd" type="Script" id=1]
+
+[sub_resource type="VoxelGeneratorFlat" id=1]
+
+[sub_resource type="Voxel" id=2]
+voxel_name = "air"
+transparent = true
+
+[sub_resource type="Voxel" id=3]
+voxel_name = "solid"
+geometry_type = 1
+collision_aabbs = [ AABB( 0, 0, 0, 1, 1, 1 ) ]
+cube_geometry/padding_y = 0.0
+cube_tiles/left = Vector2( 0, 0 )
+cube_tiles/right = Vector2( 0, 0 )
+cube_tiles/bottom = Vector2( 0, 0 )
+cube_tiles/top = Vector2( 0, 0 )
+cube_tiles/back = Vector2( 0, 0 )
+cube_tiles/front = Vector2( 0, 0 )
+
+[sub_resource type="VoxelLibrary" id=4]
+voxels/0 = SubResource( 2 )
+voxels/1 = SubResource( 3 )
+
+[node name="VoxelTerrain" type="VoxelTerrain"]
+stream = SubResource( 1 )
+voxel_library = SubResource( 4 )
+viewer_path = NodePath("Camera")
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 50, 50 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+script = ExtResource( 1 )
